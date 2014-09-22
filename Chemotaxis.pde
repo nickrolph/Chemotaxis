@@ -32,7 +32,17 @@ void draw()
 
   }	  
 }
- 
+ void keyPressed()
+ {
+ 	if (key == 'r') 
+{
+	for (int i = 0; i < numBac.length; ++i) 
+ {
+ 	numBac [i] = new Bacteria((int)(Math.random()*500),(int)(Math.random()*500));
+ }
+	
+}
+ }
  class Bacteria  
  {     
  	int locationXbob, locationYbob, yMove, xMove, bacColor;
@@ -100,4 +110,4 @@ void draw()
  	  	fill(255, 0, 0);
  	  	ellipse(mouseX, mouseY, 10, 10);
  	  }
- }    
+ }   
