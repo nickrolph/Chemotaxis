@@ -1,5 +1,21 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Chemotaxis extends PApplet {
+
 Bacteria [] numBac;
-void setup()   
+public void setup()   
 {     
  	size(500,500) ; 
  	numBac = new Bacteria [24] ;
@@ -9,13 +25,20 @@ void setup()
  }
  	
 }   
-void draw()   
+public void draw()   
 {
 	frameRate(25);
  	background(240);
  	for (int j = 0; j < numBac.length; ++j) 
   {
+  	//if (mousePressed == true ) 
+ 	 //{
+ 	 	//numBac[j].follow();
+ 	// }
+ 	// else 
+ 	// {
  	 	numBac[j].move();
+ 	// }
  	 for (int k = 0; k < numBac.length; ++k) 
   	{
 	 if (mousePressed == true && (mouseX < numBac[k].locationXbob + 11 && mouseX  > numBac[k].locationXbob - 11 ) && (mouseY < numBac[k].locationYbob +11 && mouseY > numBac[k].locationYbob -11 ))
@@ -45,9 +68,9 @@ void draw()
  	  	bacColor = (int)(Math.random()* 255);
 
  	  }
- 	  void move()
+ 	  public void move()
  	  {
- 	  	if (Math.random() > .5)
+ 	  	if (Math.random() > .5f)
  	  	{
  	  		yMove = (int)(Math.random()*7)-3;
  	  		locationYbob = locationYbob + yMove;
@@ -58,7 +81,7 @@ void draw()
  	  		locationXbob = locationXbob + xMove;
  	  	}
  	  }
- 	  void follow()
+ 	  public void follow()
  	  {
  	  	if (mouseX > locationXbob)
  	  	{
@@ -83,21 +106,30 @@ void draw()
  	  		locationYbob = locationYbob - yMove;
  	  	}
  	  }
- 	  void moveGrab()
+ 	  public void moveGrab()
  	  {
  	  	locationYbob = mouseY;
  	    locationXbob = mouseX;
  	  }
  	  	
- 	  void showNormal()
+ 	  public void showNormal()
  	  {
  	  	fill(0, bacColor, 0);
  	  	ellipse(locationXbob, locationYbob, 10, 10);
 
  	  }
- 	  void showGrab()
+ 	  public void showGrab()
  	  {
  	  	fill(255, 0, 0);
  	  	ellipse(mouseX, mouseY, 10, 10);
  	  }
  }    
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Chemotaxis" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
